@@ -39,7 +39,7 @@ function VulnAD-GetRandom {
    Param(
      [array]$InputList
    )
-   return Get-Random -InputObject $InputList
+   return $InputList
 }
 
 function VulnAD-AddADGroup {
