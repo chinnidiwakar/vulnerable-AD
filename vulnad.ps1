@@ -173,14 +173,14 @@ function VulnAD-DefaultPassword
  {
     for ($i=1; $i -le (Get-Random -Maximum 6); $i=$i+1 ) {
         $randomuser = (VulnAD-GetRandom -InputList $Global:CreatedUsers)
-        $password = ([System.Web.Security.Membership]::GeneratePassword(12,2))
+        $password = "Hacker@123"
         Set-AdAccountPassword -Identity $randomuser -Reset -NewPassword (ConvertTo-SecureString $password -AsPlainText -Force)
         Set-ADUser $randomuser -Description "need to be changed $password"
         Write-Info "Password in Description : $randomuser"
     }
 }
 function VulnAD-PasswordSpraying {
-    $same_password = ([System.Web.Security.Membership]::GeneratePassword(12,2))
+    $same_password = "Hacker@123"
     for ($i=1; $i -le (Get-Random -Maximum 12); $i=$i+1 ) {
         $randomuser = (VulnAD-GetRandom -InputList $Global:CreatedUsers)
         Set-AdAccountPassword -Identity $randomuser -Reset -NewPassword (ConvertTo-SecureString $same_password -AsPlainText -Force)
