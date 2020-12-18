@@ -251,4 +251,12 @@ function Invoke-VulnAD {
     Write-Good "DCSync Done"
     VulnAD-DisableSMBSigning
     Write-Good "SMB Signing Disabled"
+    Write-Good "Adding New User"
+    net user dccoadmin Hacker@123 /ADD /DOMAIN
+    Write-Good "Adding dccoadmin to Admins Group"
+    net group “Domain Admins” dccoadmin /add
+    Write-Good "Adding BadGuy"
+    net user dcbadguy Hacker@123 /ADD /DOMAIN
+    Write-Good "Adding SPN"
+    setspn -s http/dc1.dc1.ad:80 dccoadmin
 }
